@@ -6,14 +6,26 @@ CURRENT_TIME="$(date +"%x %r %Z")"
 TIMESTAMP="Generated $CURRENT_TIME, by $USER"
 
 report_up_time() {
+	cat <<- _EOF_
+		<h2>System Uptime (Tempo de Atividade do Sistema)</h2>
+		<pre>$(uptime)</pre>
+		_EOF_
 	return
 }
 
 report_disk_space() {
+	cat <<- _EOF_
+		<h2>Disk Space Utilization (Utilização do Espaço em Disco)</h2>
+		<pre>$(df -h)</pre>
+		_EOF_
 	return
 }
 
 report_home_space() {
+	cat <<- _EOF_
+		<h2>Home Space Utilization</h2>
+		<pre>$(du -sh /home/*)</pre>
+		_EOF_
 	return
 }
 
@@ -25,8 +37,8 @@ cat << _EOF_
 	<body>
 		<h1>$TITLE</h1>
 		<p>$TIMESTAMP</p>
-		$(report_uptime)
-		$(repost_disk_space)
+		$(report_up_time)
+		$(report_disk_space)
 		$(report_home_space)
 	</body>
 </html>
